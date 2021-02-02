@@ -22,7 +22,7 @@ class Build : PluginTargets
     ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///   - Microsoft VSCode           https://nuke.build/vscode
 
-    public static int Main() => Execute<Build>(x => x.TestTarget);
+    public static int Main() => Execute<Build>(x => x.BuildEditor);
 
     [Solution] readonly Solution Solution;
     
@@ -32,12 +32,5 @@ class Build : PluginTargets
 
     public override AbsolutePath ToPlugin => UnrealPluginsFolder / "MyPlugin" / "MyPlugin.uplugin";
 
-    public override AbsolutePath ToProject => RootDirectory / "SomeTestProject.uproject";
-
-    public Target TestTarget => _ => _
-        .DependsOn(OtherTestTarget)
-        .Executes(() => Info("Yay this is seemingly working"));
-
-    public Target OtherTestTarget => _ => _
-        .Executes(() => Info("Another target"));
+    public override AbsolutePath ToProject => RootDirectory / "MyPluginTest.uproject";
 }
