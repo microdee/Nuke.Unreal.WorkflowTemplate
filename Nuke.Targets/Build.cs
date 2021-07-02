@@ -11,10 +11,9 @@ using Nuke.Unreal;
 using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
-using static Nuke.Common.Logger;
 
 [CheckBuildProjectConfigurations]
-class Build : PluginTargets
+class Build : ProjectTargets
 {
     /// Support plugins are available for:
     ///   - JetBrains ReSharper        https://nuke.build/resharper
@@ -22,15 +21,7 @@ class Build : PluginTargets
     ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///   - Microsoft VSCode           https://nuke.build/vscode
 
-    public static int Main() => Execute<Build>(x => x.BuildEditor);
+    public static int Main () => Execute<Build>(x => x.BuildEditor);
 
     [Solution] readonly Solution Solution;
-    
-    public override string UnrealVersion { get; set; } = "4.26.0";
-    
-    public override string PluginVersion => "1.0.0";
-
-    public override AbsolutePath ToPlugin => UnrealPluginsFolder / "MyPlugin" / "MyPlugin.uplugin";
-
-    public override AbsolutePath ToProject => RootDirectory / "MyPluginTest.uproject";
 }
